@@ -57,8 +57,8 @@ class Parsers {
     final items = <Map<String, dynamic>>[];
     double total = 0.0;
 
-    // Common patterns for prices
-    final pricePattern = RegExp(r'\$?\s*(\d+\.?\d{0,2})');
+    // More restrictive pattern for prices - requires currency symbol or decimal point
+    final pricePattern = RegExp(r'(?:\$|USD|€|£)?\s*(\d+\.\d{2})\b');
     
     for (final line in lines) {
       final trimmedLine = line.trim();

@@ -63,7 +63,8 @@ class DummySalesRepository implements SalesRepository {
     await Future.delayed(const Duration(milliseconds: 500));
     return _sales
         .where((sale) =>
-            sale.saleDate.isAfter(start) && sale.saleDate.isBefore(end))
+            (sale.saleDate.isAfter(start) || sale.saleDate.isAtSameMomentAs(start)) &&
+            (sale.saleDate.isBefore(end) || sale.saleDate.isAtSameMomentAs(end)))
         .toList();
   }
 

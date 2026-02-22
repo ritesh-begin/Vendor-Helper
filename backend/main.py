@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from datetime import datetime
 from typing import List, Dict, Any
+import os
 import uvicorn
 
 from gemini_service import GeminiService
@@ -11,9 +12,11 @@ from auth_middleware import authenticate_user
 app = FastAPI(title="Shop Insights API", version="1.0.0")
 
 # CORS configuration
+# TODO: In production, replace with specific allowed origins
+allowed_origins = os.getenv("ALLOWED_ORIGINS", "*").split(",")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Configure appropriately for production
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

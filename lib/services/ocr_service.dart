@@ -51,10 +51,10 @@ class OCRService {
     final items = <Map<String, dynamic>>[];
     double total = 0.0;
 
-    // Simple parsing logic - can be enhanced with more sophisticated patterns
+    // More specific pattern for prices - requires decimal point or currency symbol
     for (final line in lines) {
-      // Look for price patterns (e.g., $XX.XX or XX.XX)
-      final priceMatch = RegExp(r'(\d+\.?\d*)').firstMatch(line);
+      // Look for price patterns with currency symbol or decimal format
+      final priceMatch = RegExp(r'(?:\$|USD|€|£)?\s*(\d+\.\d{2})\b').firstMatch(line);
       if (priceMatch != null) {
         final price = double.tryParse(priceMatch.group(1) ?? '0');
         if (price != null && price > 0) {
