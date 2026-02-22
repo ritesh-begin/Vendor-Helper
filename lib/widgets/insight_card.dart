@@ -102,7 +102,7 @@ class InsightCard extends StatelessWidget {
     }
   }
 
-  Color _getTypeColor() {
+  Color _getSentimentColor() {
     switch (sentiment.toLowerCase()) {
       case 'positive':
         return Colors.green;
